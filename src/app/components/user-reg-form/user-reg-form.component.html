@@ -1,0 +1,141 @@
+
+      <form [formGroup]="userRegForm" (ngSubmit)="onUserRegister()">
+        <!-- User Name -->
+        <div class="form-group">
+          <label for="username"
+            >Enter User Name <span class="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="username"
+            formControlName="username"
+          />
+
+          <ng-container
+            *ngIf="
+              isFormSubmitted ||
+              (f['username'].touched && f['username'].invalid)
+            "
+          >
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['username'].hasError('required')"
+            >
+              User Name is required
+            </span>
+
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['username'].hasError('pattern') && f['username'].dirty"
+            >
+              User Name shuld have one Capital Letter, one number and one
+              special character
+            </span>
+          </ng-container>
+        </div>
+
+        <!-- E-Mail -->
+        <div class="form-group">
+          <label for="email">Email <span class="text-danger">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="email"
+            id="email"
+            name="email"
+            autocomplete="on"
+          />
+          <ng-container
+            *ngIf="
+              (f['email'].touched && f['email'].invalid) || isFormSubmitted
+            "
+          >
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['email'].hasError('required')"
+            >
+              Please Enter your email
+            </span>
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['email'].hasError('pattern') && f['email'].dirty"
+            >
+              Please Enter your valid Email-id
+            </span>
+          </ng-container>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="pw">Password <span class="text-danger">*</span></label>
+          <div class="pwDiv">
+            <input
+              [type]="isPwVisible ? 'text' : 'password'"
+              class="form-control"
+              formControlName="pw"
+              id="pw"
+              name="pw"
+            />
+          <div (click)="pwVisible()">
+            <i class="fa-solid fa-eye-slash" *ngIf="!isPwVisible"></i>
+              <i class="fa-solid fa-eye" *ngIf="isPwVisible"></i>
+          </div>
+              
+          
+          </div>
+
+          <ng-container
+            *ngIf="(f['pw'].touched && f['pw'].invalid) || isFormSubmitted"
+          >
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['pw'].hasError('required')"
+            >
+              Please Enter Password
+            </span>
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['pw'].hasError('pattern') && f['pw'].dirty"
+            >
+              Please Enter valid Password
+            </span>
+          </ng-container>
+        </div>
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="cpw"
+            >Confirm Password <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="cpw"
+            id="cpw"
+            name="cpw"
+            autocomplete="on"
+          />
+          <ng-container
+            *ngIf="(f['cpw'].touched && f['cpw'].invalid) || isFormSubmitted"
+          >
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="f['cpw'].hasError('required')"
+            >
+              Please Enter Confirm Password
+            </span>
+            <span
+              class="text-danger text-capitalize"
+              *ngIf="(f['cpw'].dirty && userRegForm.errors?.['pwMatchError']) && f['cpw'].valid"
+            >
+              Password and confirm pass doesnot match
+            </span>
+          </ng-container>
+        </div>
+
+        <div class="text-right">
+          <button class="btn btn-success">Register</button>
+        </div>
+      </form>
+  

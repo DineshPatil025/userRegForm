@@ -1,0 +1,23 @@
+
+<div class="table-responsive">
+    <table class="table table-bordered" *ngIf="usersArr.length>0 ">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>User Email</th>
+                <th>User Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of usersArr">
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.pw}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-container #noUsers  *ngIf="usersArr.length==0 ">
+        <span class="text-danger text-capitalize text-center">No Users added yet</span>
+    </ng-container>
+</div>
